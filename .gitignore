@@ -1,0 +1,21 @@
+# Gitignore for C projects.
+
+*.o
+*.dSYM
+*.a
+*.so
+*.dll
+
+# Git stuff.
+
+.git
+.gitignore
+
+# Project-specific executables
+dmenu/dmenu
+dmenu/stest
+dwm/dwm
+dwmstatus/dwmstatus
+slock/slock
+st/st
+
