@@ -5,8 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-/* static char font[] = "Anonymous Pro:pixelsize=14:antialias=true:autohint=true"; */
-static char font[] = "Anonymous Pro:pixelsize=16:antialias=true:autohint=true";
+static char font[] = "Bitstream Vera Sans Mono:pixelsize=12:antialias=true:autohint=true";
 static int borderpx = 2;
 static char shell[] = "/bin/bash";
 static char *utmp = NULL;
