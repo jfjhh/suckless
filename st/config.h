@@ -45,7 +45,7 @@ static unsigned int blinktimeout = 800;
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
  * it
  */
-static int bellvolume = 0;
+static int bellvolume = 100;
 
 /* TERM value */
 static char termname[] = "xterm-256color";
