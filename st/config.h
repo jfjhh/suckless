@@ -64,7 +64,7 @@ static const char *colorname[] = {
 	"magenta3",
 	"cyan3",
 	"gray90",
-
+	
 	/* 8 bright colors */
 	"gray50",
 	"red",
@@ -74,6 +74,24 @@ static const char *colorname[] = {
 	"magenta",
 	"cyan",
 	"white",
+
+	/* Attempt Solarized */
+	/* "#002b36", */
+    /* "#073642", */
+    /* "#586e75", */
+    /* "#657b83", */
+    /* "#839496", */
+    /* "#93a1a1", */
+    /* "#eee8d5", */
+    /* "#fdf6e3", */
+    /* "#b58900", */
+    /* "#cb4b16", */
+    /* "#dc322f", */
+    /* "#d33682", */
+    /* "#6c71c4", */
+    /* "#268bd2", */
+    /* "#2aa198", */
+    /* "#859900", */
 
 	[255] = 0,
 

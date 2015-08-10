@@ -9,7 +9,7 @@ static const char selbordercolor[]  = "#4d4d4d";
 static const char selbgcolor[]      = "#122e4a";
 static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int snap      = 32;       /* snap pimel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
@@ -54,7 +54,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "xterm", NULL };
+/* static const char *termcmd[]  = { "st", NULL }; */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
