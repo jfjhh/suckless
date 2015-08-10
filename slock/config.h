@@ -1,5 +1,6 @@
-#define COLOR1 "black"
-/* Blue */
-#define COLOR2 "#122e4a"
-/* Orange */
-/* #define COLOR2 "#ff6600" */
+/* Black */
+#define COLOR1 "#000000"
+
+/* Solarized Base 02 */
+#define COLOR2 "#073642"
+

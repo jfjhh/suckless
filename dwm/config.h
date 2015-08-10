@@ -1,13 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#4d4d4d";
-static const char selbgcolor[]      = "#122e4a";
-static const char selfgcolor[]      = "#eeeeee";
+static const char font[]            = "-*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*";
+/* static const char normbordercolor[] = "#444444"; */
+/* static const char normbgcolor[]     = "#222222"; */
+/* static const char normfgcolor[]     = "#bbbbbb"; */
+/* static const char selbordercolor[]  = "#4d4d4d"; */
+/* static const char selbgcolor[]      = "#122e4a"; */
+/* static const char selfgcolor[]      = "#eeeeee"; */
+static const char normbordercolor[] = "#073642";
+static const char normbgcolor[]     = "#002b36";
+static const char normfgcolor[]     = "#839496";
+static const char selbordercolor[]  = "#586e75";
+static const char selbgcolor[]      = "#073642";
+static const char selfgcolor[]      = "#93a1a1";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pimel */
 static const Bool showbar           = True;     /* False means no bar */
@@ -24,6 +30,7 @@ static const Rule rules[] = {
 	/* class       instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",      NULL,       NULL,       0,            True,        -1 },
 	{ "Anki",      NULL,       NULL,       0,            True,        -1 },
+	{ "feh",       NULL,       NULL,       0,            True,        -1 },
 	{ "trayer",    NULL,       NULL,       1 << 4,       False,       -1 },
 	{ "owncloud",  NULL,       NULL,       1 << 4,       False,       -1 },
 };
