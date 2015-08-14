@@ -31,6 +31,7 @@ static const Rule rules[] = {
 	{ "Gimp",      NULL,       NULL,       0,            True,        -1 },
 	{ "Anki",      NULL,       NULL,       0,            True,        -1 },
 	{ "feh",       NULL,       NULL,       0,            True,        -1 },
+	{ "evince",    NULL,       NULL,       0,            True,        -1 },
 	{ "trayer",    NULL,       NULL,       1 << 4,       False,       -1 },
 	{ "owncloud",  NULL,       NULL,       1 << 4,       False,       -1 },
 };
