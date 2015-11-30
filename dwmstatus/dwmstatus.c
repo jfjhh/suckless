@@ -11,12 +11,14 @@
 
 static Display *dpy;
 
-void setstatus(char *str) {
+void setstatus(char *str)
+{
 	XStoreName(dpy, DefaultRootWindow(dpy), str);
 	XSync(dpy, False);
 }
 
-float getfreq(char *file) {
+float getfreq(char *file)
+{
 	FILE *fd;
 	char *freq;
 	float ret;
@@ -31,12 +33,13 @@ float getfreq(char *file) {
 	fgets(freq, 10, fd);
 	fclose(fd);
 
-	ret = atof(freq)/1000000;
+	ret = atof(freq) / 1e6;
 	free(freq);
 	return ret;
 }
 
-char *getcpu(void) {
+char *getcpu(void)
+{
 	FILE *fd;
 	char *buf, *buf_part, *scaling_cur_freq;
 	size_t buf_len, buf_part_len, scaling_cur_freq_len;
@@ -103,7 +106,8 @@ char *getcpu(void) {
 	return buf;
 }
 
-char *getdatetime(void) {
+char *getdatetime(void)
+{
 	char *buf;
 	time_t result;
 	struct tm *resulttm;
@@ -126,11 +130,13 @@ char *getdatetime(void) {
 	return buf;
 }
 
-float getbattery(void) {
+float getbattery(void)
+{
 	FILE *fd;
 	int charge_now, charge_full, energy_now, energy_full, voltage_now;
 
-	if ((fd = fopen("/sys/class/power_supply/BAT0/energy_now", "r")) != NULL) {
+	if ((fd = fopen("/sys/class/power_supply/BAT0/energy_now", "r"))
+			!= NULL) {
 		fscanf(fd, "%d", &energy_now);
 		fclose(fd);
 
@@ -153,7 +159,8 @@ float getbattery(void) {
 		return ((float)energy_now * 1000 / (float)voltage_now) * 100 /
 			((float)energy_full * 1000 / (float)voltage_now);
 
-	} else if ((fd = fopen("/sys/class/power_supply/BAT1/charge_now", "r")) != NULL) {
+	} else if ((fd = fopen("/sys/class/power_supply/BAT1/charge_now", "r"))
+			!= NULL) {
 		fscanf(fd, "%d", &charge_now);
 		fclose(fd);
 
@@ -171,22 +178,21 @@ float getbattery(void) {
 	}
 }
 
-float ramusage(void) {
+float ramusage(void)
+{
 	FILE *fd;
 	char *buf;
 	int total, active, buflen;
 
-	total = active = -1;
+	total  = active = -1;
 	buflen = 512;
 
-	fd = fopen("/proc/meminfo", "r");
-	if(fd == NULL) {
+	if (!(fd = fopen("/proc/meminfo", "r"))) {
 		fprintf(stderr, "Error opening /proc/meminfo.\n");
 		return -1;
 	}
 
 	buf = (char *) malloc(sizeof(char) * buflen);
-
 	while (total == -1) {
 		fgets(buf, buflen, fd);
 		sscanf(buf, "MemTotal: %d kB\n", &total);
@@ -202,9 +208,24 @@ float ramusage(void) {
 	return ((float) active / (float) total) * 100.0;
 }
 
-int main(void) {
+float cpuusage(void)
+{
+	FILE *fd;
+	int user_jiff, nice_jiff, sys_jiff;
+
+	if (!(fd = fopen("/proc/stat", "r"))) {
+		fprintf(stderr, "Error opening /proc/stat.\n");
+		return -1;
+	}
+
+	// cpu  234646 66 57678 21381296 43506 2 362 0 0 0
+	fscanf(fd, "cpu  %d %d %d", &user_jiff, &nice_jiff, &sys_jiff);
+}
+
+int main(void)
+{
 	char *status, *datetime, *cpu_str;
-	float bat, ram;
+	float bat, ram, cpu;
 
 	if (!(dpy = XOpenDisplay(NULL))) {
 		fprintf(stderr, "Cannot open display.\n");
@@ -216,17 +237,26 @@ int main(void) {
 		return 1;
 	}
 
-	for (;;sleep(1)) {
+	for (;; sleep(1)) {
 		cpu_str = getcpu();
 		ram = ramusage();
+		cpu = cpuusage();
 		datetime = getdatetime();
 		bat = getbattery();
+
+		// if (bat != -1.0)
+		// 	snprintf(status, 200, "[ %s | %0.1f%% ]  [ %0.1f%% | %s ]",
+		// 			cpu_str, ram, bat, datetime);
+		// else
+		// 	snprintf(status, 200, "[ %s | %0.1f%% ]  [ %s ]",
+		// 			cpu_str, ram, datetime);
+
 		if (bat != -1.0)
-			snprintf(status, 200, "[ %s | %0.1f%% ]  [ %0.1f%% | %s ]",
-					cpu_str, ram, bat, datetime);
+			snprintf(status, 200, "[ %0.1f%% | %0.1f%% ]  [ %0.1f%% | %s ]",
+					cpu, ram, bat, datetime);
 		else
-			snprintf(status, 200, "[ %s | %0.1f%% ]  [ %s ]",
-					cpu_str, ram, datetime);
+			snprintf(status, 200, "[ %0.1f%% | %0.1f%% ]  [ %s ]",
+					cpu, ram, datetime);
 
 		free(cpu_str);
 		free(datetime);
