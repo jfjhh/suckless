@@ -1,11 +1,11 @@
-dmenu - dynamic menu
+dmenu-pango-imlib - dynamic menu (with pango && imlib)
 ====================
-dmenu is an efficient dynamic menu for X.
+Pango and imlib patched dmenu.
 
 
 Requirements
 ------------
-In order to build dmenu you need the Xlib header files.
+In order to build dmenu-pango-imlib you need the Xlib, pango and imlib header/library files
 
 
 Installation
@@ -22,3 +22,20 @@ Afterwards enter the following command to build and install dmenu
 Running dmenu
 -------------
 See the man page for details.
+
+Thumbnails get cached according to XDG thumbnail spec.
+http://specifications.freedesktop.org/thumbnail-spec/thumbnail-spec-latest.html
+
+Pass -g to generate thumbnails immediatly for the piped images.
+Pass -is to specify image size (keeping aspect ratio).
+Pass -ia to specify image alignment (top-center/center/top/bottom/*-gapless, where top-center is default)
+Note, that using too big images cause slowdown because images are loaded each time, selection image differs from last image.
+
+Example pipe listing with images:
+IMG:/mnt/pictures/lolcat.jpg\tThis is a lolcat\n
+IMG:/mnt/pictures/david.jpg\tThis is a picture of david\n
+This is a item without a picture\n
+
+Additional options:
+Pass -si to specify starting index to dmenu.
+ex. -si 5 to start from item 5.

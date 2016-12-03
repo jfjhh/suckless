@@ -31,6 +31,11 @@ is a dynamic menu for X, which reads a list of newline\-separated items from
 stdin.  When the user selects an item and presses Return, their choice is printed
 to stdout and dmenu terminates.  Entering text will narrow the items to those
 matching the tokens in the input.
+
+example pipe listing with images:
+   IMG:/mnt/pictures/lolcat.jpg\\tThis is a lolcat\\n
+   IMG:/mnt/pictures/david.jpg\\tThis is a picture of david\\n
+   This is a item without a picture\\n
 .P
 .B dmenu_run
 is a script used by
@@ -48,6 +53,12 @@ X until stdin reaches end\-of\-file.
 .B \-i
 dmenu matches menu items case insensitively.
 .TP
+.B \-w
+wraps selection when reaching end of list or vice versa.
+.TP
+.B \-g
+dmenu generates thumbnails from piped data according to XDG thumbnail spec.
+.TP
 .BI \-l " lines"
 dmenu lists items vertically, with the given number of lines.
 .TP
@@ -58,7 +69,7 @@ dmenu is displayed on the monitor supplied.
 defines the prompt to be displayed to the left of the input field.
 .TP
 .BI \-fn " font"
-defines the font or font set used.
++defines the font or font set used. eg. "fixed" or "Monospace-12:normal" (an xft font)
 .TP
 .BI \-nb " color"
 defines the normal background color.
@@ -74,6 +85,18 @@ defines the selected background color.
 .TP
 .BI \-sf " color"
 defines the selected foreground color.
+.TP
+.BI \-si " selected index"
+hilight specified menu item by index automatically.
+.TP
+.BI \-is " image size"
+image size used for displaying images and generating cached versions.
+if previously used image was cached before with different -is parameter, it gets cached again.
+.TP
+.BI \-ia " image alignment"
+image alignment, valid options are: top-center, center, top, bottom
+every alignment has gapless version (ex. top-center-gapless)
+top-center is default
 .TP
 .B \-v
 prints version information to stdout, then exits.
@@ -135,9 +158,6 @@ Delete line right
 .TP
 C\-m
 Return
-.TP
-C\-M
-Shift-Return
 .TP
 C\-n
 Down

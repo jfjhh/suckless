@@ -1,13 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*";
-/* static const char normbordercolor[] = "#444444"; */
-/* static const char normbgcolor[]     = "#222222"; */
-/* static const char normfgcolor[]     = "#bbbbbb"; */
-/* static const char selbordercolor[]  = "#4d4d4d"; */
-/* static const char selbgcolor[]      = "#122e4a"; */
-/* static const char selfgcolor[]      = "#eeeeee"; */
+/* static const char font[]            = "-misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1"; */
+static const char font[]            = "Unifont 12";
 static const char normbordercolor[] = "#073642";
 static const char normbgcolor[]     = "#002b36";
 static const char normfgcolor[]     = "#839496";
@@ -15,9 +10,10 @@ static const char selbordercolor[]  = "#586e75";
 static const char selbgcolor[]      = "#073642";
 static const char selfgcolor[]      = "#93a1a1";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pimel */
+static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
+static const Bool statusmarkup      = True;
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5" };
@@ -60,10 +56,16 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run",
+	"-fn", font,
+	"-nb", normbgcolor,
+	"-nf", normfgcolor,
+	"-sb", selbgcolor,
+	"-sf", selfgcolor,
+	NULL
+};
 static const char *termcmd[]  = { "xterm", NULL };
-/* static const char *termcmd[]  = { "st", NULL }; */
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
