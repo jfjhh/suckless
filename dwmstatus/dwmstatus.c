@@ -78,7 +78,7 @@ const static float  ERROR_CPU_PER = 3133.7;
 
 /* MONITOR_SLEEP_INTERVAL must be a multiple of STATUS_SLEEP_INTERVAL. */
 const static struct timespec STATUS_SLEEP_INTERVAL  = { (time_t) 1, 0L };
-const static struct timespec MONITOR_SLEEP_INTERVAL = { (time_t) 4, 0L };
+const static struct timespec MONITOR_SLEEP_INTERVAL = { (time_t) 2, 0L };
 
 /* Variables that will be freed by the signal handler. */
 static Display      *dpy;
@@ -300,36 +300,41 @@ bool getthermal(float *cur, float *trip, char *type)
 float cpuusage()
 {
 	FILE *fd;
-	int user_jiff, nice_jiff, sys_jiff, idle_jiff, new_user_jiff,
-		new_nice_jiff, new_sys_jiff, new_idle_jiff;
-
-	/* Example line from STAT:
-	 * cpu  234646 66 57678 21381296 43506 2 362 0 0 0
-	 */
+	int old_work, old_total, new_work, new_total, jiff;
+	old_work = old_total = new_work = new_total = jiff = 0;
 
 	if (!(fd = fopen(STAT, "r"))) {
 		fputs("Error opening " STAT ".\n", stderr);
 		return ERROR_CPU_PER;
 	}
-	if (fscanf(fd, "cpu  %d %d %d %d", &user_jiff, &nice_jiff,
-				&sys_jiff, &idle_jiff) != 4)
+	if (fseek(fd, 4L, SEEK_CUR) == -1)
 		return ERROR_CPU_PER;
+	
+	for (size_t i = 0; fscanf(fd, " %d", &jiff) == 1; i++) {
+		if (i < 3)
+			old_work += jiff;
+		old_total += jiff;
+	}
 
 	nanosleep(&MONITOR_SLEEP_INTERVAL, NULL);
+
 	if (!(fd = freopen(STAT, "r", fd))) {
 		fputs("Error opening " STAT ".\n", stderr);
-		return 7331.3;
+		return ERROR_CPU_PER;
 	}
-	if (fscanf(fd, "cpu  %d %d %d %d", &new_user_jiff, &new_nice_jiff,
-				&new_sys_jiff, &new_idle_jiff) != 4)
-		return 7331.3;
+	if (fseek(fd, 4L, SEEK_CUR) == -1)
+		return ERROR_CPU_PER;
+
+	for (size_t i = 0; fscanf(fd, " %d", &jiff) == 1; i++) {
+		if (i < 3)
+			new_work += jiff;
+		new_total += jiff;
+	}
 
 	fclose(fd);
 
-	/* Calculate percentage from diffs in jiffies between work and idle. */
-	return ((float) ((user_jiff + nice_jiff + sys_jiff)
-				- (new_user_jiff + new_nice_jiff + new_sys_jiff))
-			/ (float) (idle_jiff - new_idle_jiff)) * 100.0;
+	return 100.0 * ((float) (new_work - old_work))
+		/ ((float) (new_total - old_total));
 }
 
 float getvol()
