@@ -1,12 +1,11 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-/* static const char font[]            = "-misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1"; */
-static const char font[]            = "Unifont 12";
-static const char normbordercolor[] = "#073642";
+static const char font[]            = "Bitstream Vera Sans Mono 12";
+static const char normbordercolor[] = "#002b36";
 static const char normbgcolor[]     = "#002b36";
 static const char normfgcolor[]     = "#839496";
-static const char selbordercolor[]  = "#586e75";
+static const char selbordercolor[]  = "#073642";
 static const char selbgcolor[]      = "#073642";
 static const char selfgcolor[]      = "#93a1a1";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -16,7 +15,7 @@ static const Bool topbar            = True;     /* False means bottom bar */
 static const Bool statusmarkup      = True;
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -28,8 +27,6 @@ static const Rule rules[] = {
 	{ "Anki",      NULL,       NULL,       0,            True,        -1 },
 	{ "feh",       NULL,       NULL,       0,            True,        -1 },
 	{ "evince",    NULL,       NULL,       0,            True,        -1 },
-	{ "trayer",    NULL,       NULL,       1 << 4,       False,       -1 },
-	{ "owncloud",  NULL,       NULL,       1 << 4,       False,       -1 },
 };
 
 /* layout(s) */
@@ -64,7 +61,7 @@ static const char *dmenucmd[] = { "dmenu_run",
 	"-sf", selfgcolor,
 	NULL
 };
-static const char *termcmd[]  = { "xterm", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
 
 
 static Key keys[] = {
