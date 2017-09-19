@@ -213,12 +213,12 @@ float getbattery(void)
 		return ((float) energy_now * 1000 / (float) voltage_now) * 100 /
 			((float) energy_full * 1000 / (float) voltage_now);
 
-	} else if ((fd = fopen("/sys/class/power_supply/BAT1/charge_now", "r"))
+	} else if ((fd = fopen("/sys/class/power_supply/BAT0/charge_now", "r"))
 			!= NULL) {
 		fscanf(fd, "%d", &charge_now);
 		fclose(fd);
 
-		fd = fopen("/sys/class/power_supply/BAT1/charge_full", "r");
+		fd = fopen("/sys/class/power_supply/BAT0/charge_full", "r");
 		if(fd == NULL) {
 			fputs("Error opening charge_full.\n", stderr);
 			return -1;
@@ -526,7 +526,7 @@ int main(void)
 		if (bat != -1.0)
 			status_chars += snprintf(status + status_chars,
 					STATUS_LEN - status_chars,
-					", %.1f%%", bat);
+					", %.2f%%", bat);
 
 		/* Add date and time to status. */
 		status_chars += snprintf(status + status_chars,
