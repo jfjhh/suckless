@@ -22,16 +22,18 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class       instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",      NULL,       NULL,       0,            True,        -1 },
-	{ "Anki",      NULL,       NULL,       0,            True,        -1 },
-	{ "feh",       NULL,       NULL,       0,            True,        -1 },
-	{ "evince",    NULL,       NULL,       0,            True,        -1 },
-	{ "tkremind",  NULL,       NULL,       0,            True,        -1 },
+	/* class             instance  title  tags mask  isfloating  monitor */
+	{ "Gimp",            NULL,     NULL,  0,         True,       -1},
+	{ "Anki",            NULL,     NULL,  0,         True,       -1},
+	{ "feh",             NULL,     NULL,  0,         True,       -1},
+	{ "Tkremind",        NULL,     NULL,  0,         True,       -1},
+	{ "Wicd-client.py",  NULL,     NULL,  0,         True,       -1},
+	{ "Galculator",      NULL,     NULL,  0,         True,       -1},
+	{ "Pinentry-gtk-2",  NULL,     NULL,  0,         True,       -1},
 };
 
 /* layout(s) */
-static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact      = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
 
@@ -63,7 +65,6 @@ static const char *dmenucmd[] = { "dmenu_run",
 	NULL
 };
 static const char *termcmd[]  = { "urxvt", NULL };
-
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
