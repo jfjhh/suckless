@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "Bitstream Vera Sans Mono 9";
+static const char font[]            = "Dejavu Sans 9";
 static const char normbordercolor[] = "#002b36";
 static const char normbgcolor[]     = "#002b36";
 static const char normfgcolor[]     = "#839496";
@@ -27,6 +27,7 @@ static const Rule rules[] = {
 	{ "Anki",      NULL,       NULL,       0,            True,        -1 },
 	{ "feh",       NULL,       NULL,       0,            True,        -1 },
 	{ "evince",    NULL,       NULL,       0,            True,        -1 },
+	{ "tkremind",  NULL,       NULL,       0,            True,        -1 },
 };
 
 /* layout(s) */

@@ -477,7 +477,7 @@ int main(void)
 		if (track) {
 			status_chars += snprintf(status + status_chars,
 					STATUS_LEN - status_chars,
-					"<span color='#859900'>%s</span> ", track);
+					"<span color='#859900'>%s</span>  ", track);
 
 			/* Add cmus volume to status. */
 			if (cmus_vol == -1)
@@ -513,20 +513,21 @@ int main(void)
 		if (temp_ok)
 			status_chars += snprintf(status + status_chars,
 					STATUS_LEN - status_chars,
-					"%3.1fC cur, %3.1fC %s, ",
-					cur_temp, trip_temp, thermal_type);
+					"%3.1f\u00B0C  ", cur_temp);
+					// "%3.1fC cur, %3.1fC %s, ",
+					// cur_temp, trip_temp, thermal_type);
 
 		/* Add cpu and memory usage to status. */
 		status_chars += snprintf(status + status_chars,
 				STATUS_LEN - status_chars,
-				"%.1f%% cpu, %.1f%% mem",
+				"%.1f%% cpu  %.1f%% mem",
 				cbuf.f, ram);
 
 		/* Add battery to status. */
 		if (bat != -1.0)
 			status_chars += snprintf(status + status_chars,
 					STATUS_LEN - status_chars,
-					", %.2f%%", bat);
+					"  %.2f%%", bat);
 
 		/* Add date and time to status. */
 		status_chars += snprintf(status + status_chars,
